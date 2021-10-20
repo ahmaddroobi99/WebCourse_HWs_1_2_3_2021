@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	        <title>Test</title>
+	        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	        <script type="text/javascript">
+	        
+	        function CheckBGCookie() {
+	        var FavBackgroundImgName=getCookie("FavBackgroundImgName");
+			
+				if (FavBackgroundImgName==null)
+				{
+					FavBackgroundImgName="";
+					alert("Background image cookie has not been found");
+
+
+					var x = document.getElementById("SetBGDiv");
+					if (x.style.display === "none") {
+					    x.style.display = "block";
+
+					}
+
+
+					document.getElementById("InBGDiv").style.display = "none";
+
+				}else {
+
+					document.body.style.backgroundImage = "url('"+FavBackgroundImgName+".jpg')";
+					alert(FavBackgroundImgName);
+					document.getElementById("SetBGDiv").style.display = "none";					
+					document.getElementById("InBGDiv").style.display = "block";
+				}
+
+			 
+				
+				
+	        }
+
+
+	      	window.onload=CheckBGCookie;
+	        
+	        </script>
+	</head>
+	    
+	<script type="text/javascript">
+
+ 
+		function CreateCookie(imgName){
+			document.cookie="FavBackgroundImgName="+imgName+";expires=Wed, 18 Dec 2026 12:00:00 GMT" ;
+		}
+
+		function displayCookies() {
+			var FavBackgroundImgName=getCookie("FavBackgroundImgName");
+			
+			if (FavBackgroundImgName==null)
+			{
+				FavBackgroundImgName="";
+				document.body.style.backgroundImage = "url('.jpg')";
+				alert ("No Cookies for FavBackgroundImgName");
+			}else {
+				document.body.style.backgroundImage = "url('"+FavBackgroundImgName+".jpg')";
+				alert(FavBackgroundImgName);
+			}
+
+		 
+			
+			
+			
+			
+
+		}
+
+
+		function getCookie(name) {
+			var nameEQ = name + "=";
+		 	var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(nameEQ) != -1) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		} 
+
+
+
+		
+
+		function checkRadioOption(){
+
+			  var radios = document.getElementsByName('BackgroundO');
+
+			  for (var i = 0, length = radios.length; i < length; i++) {
+			  if (radios[i].checked) {
+			    // do whatever you want with the checked radio
+			    CreateCookie(radios[i].value);
+
+			    // only one radio can be logically checked, don't check the rest
+			    break;
+			  }
+			}
+
+			
+		}
+
+		function DeleteCookies(){
+
+			document.cookie="FavBackgroundImgName=;expires=Thu, 01 Jan 1970";
+		}
+		
+		
+	 
+	</script>
+
+	<body>
+	    
+		<div class="SetBGDivClass" id="SetBGDiv">
+			<p>
+		
+
+			<div>	
+				<label for="Background">Background Image: </label>
+				</br>
+				<input type="radio" name="BackgroundO" value="img1" checked="checked">Image 1</input>
+				</br>
+				<input type="radio" name="BackgroundO" value="img2">Image 2</input>
+				</br>
+				<input type="radio" name="BackgroundO" value="img3">Image 3</input>
+				</br>
+				<input type="radio" name="BackgroundO" value="img4">Image 4</input>
+				</br>
+				<input type="radio" name="BackgroundO" value="img5">Image 5</input>
+				</br>
+				<button type="button" onclick="checkRadioOption()">Create Cookie With Chosen BG </button>&nbsp;
+				</br>
+			</div>
+
+			<button type="button" onclick="DeleteCookies()">Delete Cookie</button>&nbsp;
+
+			</br></br></br></br></br>
+			<button type="button" onclick="displayCookies()">Get & Apply Cookies Now</button>&nbsp;
+			</br>
+
+			</p>
+
+		</div>
+
+		<div class="ChangeBGDivClass" id="InBGDiv" style="display: none;">
+			<button type="button" onclick="DeleteCookies()" >Delete Cookies</button>&nbsp;
+
+		</div>
+
+
+	</body>
+
+</html>

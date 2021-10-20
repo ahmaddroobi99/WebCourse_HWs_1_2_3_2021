@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="EN-US">
+	<head>
+		 	<meta charset="utf-8" />
+	        <title>Test2</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	       
+	        <script type="text/javascript">
+	        
+	        function CheckBGlocalstData() {
+	        var FavBackgroundImgName=getlocalstData("FavBackgroundImgName");
+			
+				if (FavBackgroundImgName==null)
+				{
+					FavBackgroundImgName="";
+					alert("Background image has not been found in localStorage data");
+
+
+					var x = document.getElementById("SetBGDiv");
+					if (x.style.display === "none") {
+					    x.style.display = "block";
+
+					}
+
+
+					document.getElementById("InBGDiv").style.display = "none";
+
+				}else {
+
+					document.body.style.backgroundImage = "url('"+FavBackgroundImgName+".jpg')";
+					alert("We have found A localStorage cache named: "+FavBackgroundImgName);
+					document.getElementById("SetBGDiv").style.display = "none";					
+					document.getElementById("InBGDiv").style.display = "block";
+				}
+
+			 
+				
+				
+	        }
+
+
+	      	window.onload=CheckBGlocalstData;
+	        
+	        </script>
+	</head>
+	    
+	<script type="text/javascript">
+
+ 
+		function CreatelocalstData(imgName){
+ 
+			window.localStorage.setItem('FavBackgroundImgName', imgName);
+
+		}
+
+		function displaylocalstDatas() {
+			var FavBackgroundImgName=getlocalstData("FavBackgroundImgName");
+ 			
+			if (FavBackgroundImgName==null)
+			{
+				FavBackgroundImgName="";
+				document.body.style.backgroundImage = "url('.jpg')";
+				alert ("No localStorage for FavBackgroundImgName");
+			}else {
+
+				document.body.style.backgroundImage= "url('"+FavBackgroundImgName+".jpg')";		
+				alert("setting the backgroundImage to "+FavBackgroundImgName);
+			}
+
+		 
+			
+			
+			
+			
+
+		}
+
+
+		function getlocalstData(name) {
+ 
+			return window.localStorage.getItem(name);
+		} 
+
+
+
+		
+
+		function checkRadioOption(){
+
+			  var radios = document.getElementsByName('BackgroundO');
+
+			  for (var i = 0, length = radios.length; i < length; i++) {
+			  if (radios[i].checked) {
+ 
+ 			    CreatelocalstData(radios[i].value);
+
+ 			    break;
+			  }
+			}
+
+			
+		}
+
+		function DeletelocalstDatas(){
+
+			window.localStorage.clear();
+
+		}
+		
+		
+	 
+	</script>
+
+	<body>
+	    
+		<div class="SetBGDivClass" id="SetBGDiv">
+			<p>
+		
+
+			<div>	
+				<label for="Background">Background Image: </label>
+				</br>
+				<label for="img1"><input type="radio" name="BackgroundO" value="image1" checked="checked">Image 1</input></label>
+				</br>
+				<label for="img2"><input type="radio" name="BackgroundO" value="image2">Image 2</input></label>
+				</br>
+				<label for="img3"><input type="radio" name="BackgroundO" value="image3">Image 3</input></label>
+				</br>
+				<label for="img4"><input type="radio" name="BackgroundO" value="image4">Image 4</input></label>
+				</br>
+				<label for="img5"><input type="radio" name="BackgroundO" value="image5">Image 5</input></label>
+				</br>
+				<button type="button" onclick="checkRadioOption()">Create localStorage data With Chosen BG </button>&nbsp;
+				</br>
+			</div>
+
+			<button type="button" onclick="DeletelocalstDatas()">Delete localStorage data</button>&nbsp;
+
+			</br></br></br></br></br>
+			<button type="button" onclick="displaylocalstDatas()">Get & Apply localStorage data Now</button>&nbsp;
+			</br>
+
+			</p>
+
+		</div>
+
+		<div class="ChangeBGDivClass" id="InBGDiv" style="display: none;">
+			<button type="button" onclick="DeletelocalstDatas()" >Delete localStorage data</button>&nbsp;
+
+		</div>
+
+
+	</body>
+
+</html>
